@@ -1,4 +1,4 @@
-const ship = (length, hits) => {
+const ship = (length, hits, id) => {
 
     const hit = () => {
         hits++
@@ -13,7 +13,7 @@ const ship = (length, hits) => {
         }
     }
 
-    return{length,hits,hit,isSunk}
+    return{length,hits,id,hit,isSunk}
 }
 
 const gameBoard = () => {
@@ -28,7 +28,11 @@ const gameBoard = () => {
         [0,0,0,0,0,0,0],
     ]
 
+    let currentShips = []
+
     const placeShip = (ship, location, orientation) => {
+
+        currentShips[ship.id] = ship
 
         if (location[0] >= 0 && location[0] <= 6 &&
             location[1] >= 0 && location[1] <= 6) {
@@ -40,10 +44,10 @@ const gameBoard = () => {
 
                     endPos = [startPos[0]+ship.length-1,startPos[1]]
                     for(let x = startPos[0]; x <= endPos[0]; x++){
-                        if(boardArray[x][startPos[1]] == 1){
+                        if(boardArray[x][startPos[1]] !== 0){
                             return false
                         } else {
-                            boardArray[x][startPos[1]] = 1
+                            boardArray[x][startPos[1]] = ship.id
                         }
                     }
                     return (endPos[0] < 8 ? boardArray : false)
@@ -52,10 +56,10 @@ const gameBoard = () => {
 
                     endPos = [startPos[0],startPos[1]+ship.length-1]
                     for(let y = startPos[1]; y <= endPos[1]; y++){
-                        if(boardArray[startPos[0]][y] == 1){
+                        if(boardArray[startPos[0]][y] !== 0){
                             return false
                         } else {
-                            boardArray[startPos[0]][y] = 1
+                            boardArray[startPos[0]][y] = ship.id
                         }
                         
                     }
@@ -69,7 +73,13 @@ const gameBoard = () => {
     }
 
     const receiveAttack = (coordinates) => {
-
+        if(boardArray[coordinates[0]][coordinates[1]] !== 0){
+            let shipId = boardArray[coordinates[0]][coordinates[1]]
+            let ship = currentShips[shipId]
+            return ship.hit() 
+        } else {
+            boardArray[coordinates[0]][coordinates[1]] = 'M'
+        }
     }
     return{placeShip, receiveAttack, boardArray}
 }

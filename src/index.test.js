@@ -18,7 +18,7 @@ test('sunk', () => {
 test('place ship', () => {
     let board = gameBoard()
     
-    expect(board.placeShip(ship(5, 4), [3,1])).toEqual([
+    expect(board.placeShip(ship(5, 4, 1), [3,1])).toEqual([
         [0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0],
@@ -27,7 +27,7 @@ test('place ship', () => {
         [0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0],
     ])
-    expect(board.placeShip(ship(5, 4), [0,0], "y")).toEqual([
+    expect(board.placeShip(ship(5, 4, 1), [0,0], "y")).toEqual([
         [1,0,0,0,0,0,0],
         [1,0,0,0,0,0,0],
         [1,0,0,0,0,0,0],
@@ -36,7 +36,7 @@ test('place ship', () => {
         [0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0],
     ])
-    expect(board.placeShip(ship(5, 4), [2,1], "x")).toEqual([
+    expect(board.placeShip(ship(5, 4, 1), [2,1], "x")).toEqual([
         [1,0,0,0,0,0,0],
         [1,0,0,0,0,0,0],
         [1,1,1,1,1,1,0],
@@ -53,9 +53,9 @@ test('place ship', () => {
     expect(board.placeShip(ship(5, 4), [7,7], "y")).toBe(false)
 })
 
-/*test('receive attack', () => {
+test('receive attack', () => {
     let board = gameBoard()
-    let testShip = ship(5,4,false)
+    let testShip = ship(5,4,1,false)
     board.placeShip(testShip,[1,1],"y")
-    expect(board.receiveAttack([1,1])).toBe(testShip.hit())
-})*/
+    expect(board.receiveAttack([1,1])).toEqual(5)
+})
