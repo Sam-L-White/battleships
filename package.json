@@ -1,0 +1,27 @@
+{
+  "name": "battleships",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "watch": "jest --watch ./src/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sam-L-White/battleships.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sam-L-White/battleships/issues"
+  },
+  "homepage": "https://github.com/Sam-L-White/battleships#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  }
+}
